@@ -38,7 +38,7 @@ def make_and_get_pairs():
     return pairs
 
 
-def secret_santa(send_mail):
+def secret_santa():
     gmail_user, gmail_password = get_credentials()
     sent_from = gmail_user
     pairs = make_and_get_pairs()
@@ -53,15 +53,11 @@ def secret_santa(send_mail):
         %s
         """ % (sent_from, gift_giver_email, subject, body)
         try:
-            if send_mail == True:
-                server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-                server.ehlo()
-                #server.login(gmail_user, gmail_password)    
-                #server.sendmail(sent_from, email, email_text)
-                server.close()
+            server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+            server.ehlo()
+            #server.login(gmail_user, gmail_password)    
+            #server.sendmail(sent_from, email, email_text)
+            server.close()
         except Exception as e:
             print(e)
             print('Error occurred')
-    return pairs
-
-secret_santa(True)
